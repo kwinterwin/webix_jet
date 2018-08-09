@@ -1,4 +1,4 @@
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
 import {countries} from "models/countries";
 
 export default class CountriesView extends JetView{
@@ -29,14 +29,14 @@ export default class CountriesView extends JetView{
 		};
 	}
 	init(){
-        $$("countriesDatatable").parse(countries);
-    }
+		$$("countriesDatatable").parse(countries);
+	}
     
-    add(){
-        $$("countriesDatatable").add({Name:"djnfjen"});
-    }
+	add(){
+		$$("countriesDatatable").add({Name:"djnfjen"});
+	}
 
-    delete(id){
-        $$("countriesDatatable").remove(id);
-    }
+	delete(id){
+		$$("countriesDatatable").remove(id);
+	}
 }

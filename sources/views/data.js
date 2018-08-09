@@ -1,12 +1,12 @@
 import {JetView} from "webix-jet";
-import CountriesView from "./countriesDatatable"
-import StatusesView from "./statusesDatatable"
+import CountriesView from "./countriesDatatable";
+import StatusesView from "./statusesDatatable";
 
 export default class DataView extends JetView{
 	config(){
 		var toolbar = {
-            view:"toolbar",
-            elements:[{view: "label", label: "Data", align:"center"}]
+			view:"toolbar",
+			elements:[{view: "label", label: "Data", align:"center"}]
 		};
 		
 		var list = {
@@ -15,14 +15,14 @@ export default class DataView extends JetView{
 			select: true,
 			template:"#title#",
 			on: {
-                onAfterSelect: function (id) {
-                    $$(id).show();
-                }
-            },
+				onAfterSelect: function (id) {
+					$$(id).show();
+				}
+			},
 			data:[
 				{ id:"countries", title:"Countries"},
 				{ id:"statuses", title:"Statuses"}
-			  ]
+			]
 		};
 		var ui = {
 			rows:[
@@ -36,13 +36,13 @@ export default class DataView extends JetView{
 								{id: "statuses", rows: [StatusesView]}
 							]
 						}
-				]
-			}
+					]
+				}
 			]
 		};
 		return ui;
 	}
-	init(view){
+	init(){
 	
 	}
 }

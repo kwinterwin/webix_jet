@@ -1,5 +1,5 @@
 
-import {JetView, plugins} from "webix-jet";
+import {JetView} from "webix-jet";
 import {statuses} from "models/statuses";
 
 export default class StatusesView extends JetView{
@@ -31,14 +31,9 @@ export default class StatusesView extends JetView{
 		};
 	}
 	init(){
-        $$("statusesDatatable").parse(statuses);
-    }
-    
-    add(){
-        $$("statusesDatatable").add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});
-    }
-
-    delete(id){
-        $$("statusesDatatable").remove(id);
-    }
+		$$("statusesDatatable").parse(statuses);}   
+	add(){
+		$$("statusesDatatable").add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});}
+	delete(id){
+		$$("statusesDatatable").remove(id);}
 }
