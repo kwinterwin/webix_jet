@@ -10,7 +10,7 @@ export default class ContactsView extends JetView{
 	config(){
 		var list = {
 			view:"list",
-			id:"list", 
+			localId:"list", 
 			css:"contact",
 			select: true, 
 			gravity:1, 
@@ -52,10 +52,11 @@ export default class ContactsView extends JetView{
 		return {cols:[{rows:[toolbar, list,{},buttonAdd]},FormView]};
 	}
 	init(view){
-		view.queryView({view:"list"}).parse(ContactsData);  
-		view.queryView({view:"list"}).select(this.getParam("id"));   
+		view.queryView({view:"list"}).parse(ContactsData);  	  
 	}
-	urlChange(){
-	
+	urlChange(view){
+		var id = this.getParam("id") || ContactsData.getFirstId();
+		if(ContactsData.exists(id))
+			view.queryView({view:"list"}).select(id); 
 	}
 }

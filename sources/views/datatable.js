@@ -8,7 +8,6 @@ export default class DatatableView extends JetView{
 				{
 					view:"datatable",
 					autoConfig: true,
-					id:"datatable",
 					select: true,
 					editable: true,
 					editaction: "dblclick",
@@ -26,6 +25,7 @@ export default class DatatableView extends JetView{
 		};
 	}
 	init(view){
+	//	this._table = 
 		view.queryView({view:"datatable"}).parse(countries); 
 	}
 }

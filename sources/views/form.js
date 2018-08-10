@@ -6,20 +6,20 @@ import {ContactsData} from "./contacts";
 export default class FormView extends JetView{
 	config(){
 		return {
-			view:"form", id:"myform", gravity:3, elements:[
+			view:"form", localId:"myform", gravity:3, elements:[
 				{ view:"text", label:"User Name", name:"Name", inputWidth:300 },
 				{ view:"text", label:"Email", name:"Email", inputWidth:300},
 				{
 					view:"combo", 
 					label: "Country",
-					options:countries,
+					options:{body:{template:"#Name#"}, data: countries},
 					inputWidth:300,
 					name:"Country"
 				},
 				{
 					view:"combo", 
 					label: "Status",
-					options:statuses,
+					options:{body:{template:"#Name#"}, data: statuses},
 					inputWidth:300,
 					name: "Status"
 				},{}
@@ -38,6 +38,7 @@ export default class FormView extends JetView{
 	}
 	urlChange(view){
 		var id = this.getParam("id");
-		view.setValues(ContactsData.getItem(id));
+		if(id && ContactsData.exists(id))
+			view.setValues(ContactsData.getItem(id));
 	}
 }
