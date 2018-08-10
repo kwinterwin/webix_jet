@@ -16,7 +16,7 @@ export default class DataView extends JetView{
 			template:"#title#",
 			on: {
 				onAfterSelect: function (id) {
-					$$(id).show();
+					webix.$$(id).show();
 				}
 			},
 			data:[
@@ -32,7 +32,7 @@ export default class DataView extends JetView{
 						list,
 						{
 							cells: [
-								{id: "countries", rows: [CountriesView]},
+								{id: "countries", rows:[CountriesView]},
 								{id: "statuses", rows: [StatusesView]}
 							]
 						}
@@ -42,7 +42,7 @@ export default class DataView extends JetView{
 		};
 		return ui;
 	}
-	init(){
-	
+	init(view){
+		view.queryView({view:"list"}).select("countries");
 	}
 }

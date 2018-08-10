@@ -1,39 +1,14 @@
-
-import {JetView} from "webix-jet";
 import {statuses} from "models/statuses";
+import DatatableView from "./datatable";
 
-export default class StatusesView extends JetView{
-	config(){
-		return {
-			rows:[
-				{
-					view:"datatable",
-					columns:[
-						{ id:"Name", template:"#Name#", editor:"text"},
-						{ id:"Icon", template:"#Icon#", fillspace:true, editor:"text"}
-					],
-					id:"statusesDatatable",
-					select: true,
-					editable: true,
-					editaction: "dblclick",
-					scrollX:false,
-					borderless:true
-				},
-				{},
-				{
-					cols:[
-						{view:"button", value:"Add", click:()=>this.add()},
-						{view:"button", value:"Delete", click:()=>this.delete($$("statusesDatatable").getSelectedId())}
-					]
-				}
-			]
-			
-		};
-	}
-	init(){
-		$$("statusesDatatable").parse(statuses);}   
+export default class StatusesView extends DatatableView{
+	init(view){
+		view.queryView({view:"datatable"}).parse(statuses);
+	}   
 	add(){
-		$$("statusesDatatable").add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});}
+		this.getRoot().queryView({view:"datatable"}).add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});
+	}
 	delete(id){
-		$$("statusesDatatable").remove(id);}
+		this.getRoot().queryView({view:"datatable"}).remove(id);
+	}
 }

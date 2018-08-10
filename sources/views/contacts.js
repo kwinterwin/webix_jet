@@ -1,15 +1,27 @@
 import {JetView} from "webix-jet";
 import {contacts} from "models/contacts";
+import FormView from "./form";
+
+export var ContactsData = new webix.DataCollection({
+	data:contacts
+});
 
 export default class ContactsView extends JetView{
 	config(){
-		var list =  {
+		var list = {
 			view:"list",
 			id:"list", 
 			css:"contact",
 			select: true, 
 			gravity:1, 
+			borderless:true,
 			template:"#Name#<br>#Email#<i class='fa fa-times delete' style='float:right;margin-top:7px;'></i>",
+			on: {
+				"onAfterSelect":(id)=>{
+					var path = "/top/contacts?id="+id;
+					this.app.show(path);
+				}
+			},
 			onClick: {
 				delete: function (e, id) {
 					webix.confirm({
@@ -18,32 +30,32 @@ export default class ContactsView extends JetView{
 						cancel: "No",
 						callback: function (result) {
 							if (result) {
-								$$("list").remove(id);
+								ContactsData.remove(id);
 							}
 						}
 					});
 					return false;
 				}
 			}};
-		var form = {view:"form", id:"myform", gravity:3, elements:[
-			{ view:"text", label:"User Name", name:"Name", inputWidth:300 },
-			{ view:"text", label:"Email", name:"Email", inputWidth:300},{}
-		],
-		elementsConfig:{
-			labelPosition:"top"
-		},
-		on: {
-			"onChange":
-                function () {this.save();}
-		}};
+		var buttonAdd = {
+			view:"button",
+			value:"Add",
+			click:()=>{
+				ContactsData.add({"Name":"wevwewe","Email":"vwev@gmail.com","Status":2,"Country":1});
+			}
+		};
+		
 		var toolbar = {
 			view:"toolbar",
 			elements:[{view: "label", label: "Contacts", align:"center"}]
 		};
-		return {cols:[{rows:[toolbar, list]},form]};
+		return {cols:[{rows:[toolbar, list,{},buttonAdd]},FormView]};
 	}
 	init(view){
-		view.queryView({view:"list"}).parse(contacts);      
-		$$("myform").bind($$("list"));
+		view.queryView({view:"list"}).parse(ContactsData);  
+		view.queryView({view:"list"}).select(this.getParam("id"));   
+	}
+	urlChange(){
+	
 	}
 }
