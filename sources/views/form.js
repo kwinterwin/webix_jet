@@ -1,7 +1,9 @@
 import {JetView} from "webix-jet";
-import {countries} from "models/countries";
-import {statuses} from "models/statuses";
-import {ContactsData} from "./contacts";
+// import {countries} from "models/countries";
+// import {statuses} from "models/statuses";
+import {ContactsData} from "models/contactsCollection";
+import {CountriesData} from "models/countriesCollection";
+import {StatusesData} from "models/statusesCollection";
 
 export default class FormView extends JetView{
 	config(){
@@ -12,14 +14,14 @@ export default class FormView extends JetView{
 				{
 					view:"combo", 
 					label: "Country",
-					options:{body:{template:"#Name#"}, data: countries},
+					options:{body:{template:"#Name#", data: CountriesData} },
 					inputWidth:300,
 					name:"Country"
 				},
 				{
 					view:"combo", 
 					label: "Status",
-					options:{body:{template:"#Name#"}, data: statuses},
+					options:{body:{template:"#Name#", data: StatusesData}},
 					inputWidth:300,
 					name: "Status"
 				},{}

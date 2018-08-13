@@ -1,10 +1,6 @@
 import {JetView} from "webix-jet";
-import {contacts} from "models/contacts";
+import {ContactsData} from "models/contactsCollection";
 import FormView from "./form";
-
-export var ContactsData = new webix.DataCollection({
-	data:contacts
-});
 
 export default class ContactsView extends JetView{
 	config(){
@@ -52,11 +48,17 @@ export default class ContactsView extends JetView{
 		return {cols:[{rows:[toolbar, list,{},buttonAdd]},FormView]};
 	}
 	init(view){
-		view.queryView({view:"list"}).parse(ContactsData);  	  
+		view.queryView({view:"list"}).parse(ContactsData);  
+		// view.queryView({view:"list"}).select(ContactsData.getFirstId());	
+		// console.log(ContactsDat);  
 	}
 	urlChange(view){
-		var id = this.getParam("id") || ContactsData.getFirstId();
-		if(ContactsData.exists(id))
-			view.queryView({view:"list"}).select(id); 
+		ContactsData.waitData.then(()=>{
+			var id = this.getParam("id") || ContactsData.getFirstId();
+			if(ContactsData.exists(id)) {
+				view.queryView({view:"list"}).select(id);
+			}
+		});
+		
 	}
 }

@@ -1,14 +1,15 @@
-import {statuses} from "models/statuses";
+// import {statuses} from "models/statuses";
+import {StatusesData} from "models/statusesCollection";
 import DatatableView from "./datatable";
 
 export default class StatusesView extends DatatableView{
 	init(view){
-		view.queryView({view:"datatable"}).parse(statuses);
+		view.queryView({view:"datatable"}).parse(StatusesData);
 	}   
 	add(){
-		this.getRoot().queryView({view:"datatable"}).add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});
+		StatusesData.add({Name:"ilekfhneiwoln", Icon:"jnrfkjwbe"});
 	}
 	delete(id){
-		this.getRoot().queryView({view:"datatable"}).remove(id);
+		StatusesData.remove(id);
 	}
 }
